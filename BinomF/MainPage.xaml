@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
+namespace BinomF
+{
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class MainPage : Page
+    {
+        public MainPage()
+        {
+            this.InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            long a1 = Convert.ToUInt32(a.Text);
+            long b1 = Convert.ToUInt32(b.Text);
+            long n1 = Convert.ToUInt32(n.Text);
+            long r1 = 0;
+
+            for (long j = 0; j< n1; j++)
+            {
+                long rl = 0;
+                rl += Convert.ToUInt32(Math.Pow(a1, n1-j));
+                rl = rl * (Convert.ToUInt32(Math.Pow(b1, j)));
+                rl = rl * (getBiC(n1, j));
+                r1 += rl;
+
+                
+            }
+
+            result.Text = r1.ToString();
+        }
+
+        private long getBiC(long n1, long j)
+        {
+            return getFact(n1) / (getFact(j - n1) * getFact(j));
+        }
+
+        private long getFact(long n1)
+        {
+            long res=1;
+            for(long j = 1; j < n1+1; j++)
+            {
+                res = res * j;
+            }
+
+            return res;
+        }
+    }
+}
